@@ -6,13 +6,14 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 
 import Time from "./Components/Time/Time";
+import Header from "./Components/Header/Header";
 
 function App() {
   return (
     <React.Fragment className="App">
       <CssBaseline />
       <Container maxWidth="md">
-        <h1>Home</h1>
+        <Header />
         <Time />
         <Typography
           component="div"
