@@ -49,7 +49,7 @@ const Time = () => {
   const [data, setData] = useState([]);
 
   // const [city, setCity] = useState("");
-  const [state, setState] = useState("");
+  // const [state, setState] = useState("");
   const [hora, setHora] = useState("");
   const [minuto, setMinuto] = useState("");
   const [segundo, setSegundo] = useState("");
@@ -63,7 +63,7 @@ const Time = () => {
           setData(response.data.data);
           // console.log(response.data.data);
           // setCity(response.data.data.city);
-          setState(response.data.data.state_code);
+          // setState(response.data.data.state_code);
 
           setHora(response.data.data.datetime.hour_24_wilz);
           setMinuto(response.data.data.datetime.minutes);
@@ -107,7 +107,7 @@ const Time = () => {
         </Card>
       </div>
 
-      <h1 style={{ margin: 30 }}>Salvador, {state}</h1>
+      <h1 style={{ margin: 30 }}>Salvador, BA</h1>
     </div>
   );
 };
