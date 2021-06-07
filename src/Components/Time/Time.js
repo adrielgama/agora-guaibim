@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import moment from "moment";
-import moment from "moment-timezone/builds/moment-timezone-with-data";
+// import moment from "moment-timezone/builds/moment-timezone-with-data";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -33,24 +33,22 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 60,
     marginBottom: 0,
   },
-  pos: {
-    marginBottom: 12,
-  },
   card: {
-    width: 130,
+    width: 120,
     height: 150,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: 15,
+    marginLeft: 20,
   },
 }));
 
 // START FUNCTION
 const Time = () => {
+  // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState([]);
 
-  const [city, setCity] = useState("");
+  // const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [hora, setHora] = useState("");
   const [minuto, setMinuto] = useState("");
@@ -63,11 +61,11 @@ const Time = () => {
         .get(`ip/?token=${API_KEY}`)
         .then((response) => {
           setData(response.data.data);
-          console.log(response.data.data);
-          setCity(response.data.data.city);
+          // console.log(response.data.data);
+          // setCity(response.data.data.city);
           setState(response.data.data.state_code);
 
-          setHora(response.data.data.datetime.hour_24_wolz);
+          setHora(response.data.data.datetime.hour_24_wilz);
           setMinuto(response.data.data.datetime.minutes);
           setSegundo(response.data.data.datetime.seconds);
         })
@@ -78,7 +76,7 @@ const Time = () => {
 
     setInterval(() => {
       loadItens();
-    }, 600);
+    }, 800);
   }, []);
 
   return (
@@ -86,11 +84,7 @@ const Time = () => {
       <div className={classes.cards}>
         <Card className={classes.card}>
           <CardContent>
-            <Typography
-              className={classes.title}
-              color="textSecondary"
-              gutterBottom
-            >
+            <Typography className={classes.title} color="#fff" gutterBottom>
               {hora}
             </Typography>
           </CardContent>
@@ -98,11 +92,7 @@ const Time = () => {
 
         <Card className={classes.card}>
           <CardContent>
-            <Typography
-              className={classes.title}
-              color="textSecondary"
-              gutterBottom
-            >
+            <Typography className={classes.title} color="#fff" gutterBottom>
               {minuto}
             </Typography>
           </CardContent>
@@ -110,20 +100,14 @@ const Time = () => {
 
         <Card className={classes.card}>
           <CardContent>
-            <Typography
-              className={classes.title}
-              color="textSecondary"
-              gutterBottom
-            >
+            <Typography className={classes.title} color="#fff" gutterBottom>
               {segundo}
             </Typography>
           </CardContent>
         </Card>
       </div>
 
-      <h1 style={{ margin: 30 }}>
-        {city}, {state}
-      </h1>
+      <h1 style={{ margin: 30 }}>Salvador, {state}</h1>
     </div>
   );
 };
