@@ -57,27 +57,28 @@ const Time = () => {
 
   useEffect(() => {
     async function loadItens() {
-      api
-        .get(`ip/?token=${API_KEY}`)
-        .then((response) => {
-          setData(response.data.data);
-          // console.log(response.data.data);
-          // setCity(response.data.data.city);
-          // setState(response.data.data.state_code);
-
-          setHora(response.data.data.datetime.hour_24_wilz);
-          setMinuto(response.data.data.datetime.minutes);
-          setSegundo(response.data.data.datetime.seconds);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      function novaHora() {
+        function pad(s) {
+          return s < 10 ? "0" + s : s;
+        }
+        var date = new Date();
+        return [
+          setHora(date.getHours()),
+          setMinuto(date.getMinutes()),
+          setSegundo(date.getSeconds()),
+        ].map(pad);
+      }
+      novaHora();
     }
 
     setInterval(() => {
       loadItens();
-    }, 800);
+    }, 990);
   }, []);
+
+  // const [actual, setActual] = useState("");
+
+  // console.log(novaHora());
 
   return (
     <div className={classes.root}>
@@ -113,3 +114,27 @@ const Time = () => {
 };
 
 export default Time;
+
+// useEffect(() => {
+//   async function loadItens() {
+//     api
+//       .get(`ip/?token=${API_KEY}`)
+//       .then((response) => {
+//         setData(response.data.data);
+//         // console.log(response.data.data);
+//         // setCity(response.data.data.city);
+//         // setState(response.data.data.state_code);
+
+//         setHora(response.data.data.datetime.hour_24_wilz);
+//         setMinuto(response.data.data.datetime.minutes);
+//         setSegundo(response.data.data.datetime.seconds);
+//       })
+//       .catch((err) => {
+//         // console.log(err);
+//       });
+//   }
+
+//   setInterval(() => {
+//     loadItens();
+//   }, 990);
+// }, []);
