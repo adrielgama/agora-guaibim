@@ -7,8 +7,8 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
-import api from "../../services/apiTime";
-const API_KEY = process.env.REACT_APP_TIMEZONE_API_KEY;
+// import api from "../../services/apiTime";
+// const API_KEY = process.env.REACT_APP_TIMEZONE_API_KEY;
 
 const useStyles = makeStyles((theme) => ({
   root: {
