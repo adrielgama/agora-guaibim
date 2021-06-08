@@ -56,6 +56,9 @@ const Weather = () => {
 
     setInterval(() => {
       loadWeather();
+      window.setTimeout(function () {
+        window.location.reload();
+      }, 60000);
     }, 60000);
   }, []);
 
