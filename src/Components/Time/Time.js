@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useState,
+  // useEffect
+} from "react";
 // import moment from "moment";
 // import moment from "moment-timezone/builds/moment-timezone-with-data";
+import Clock from "react-live-clock";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -50,31 +54,32 @@ const Time = () => {
 
   // const [city, setCity] = useState("");
   // const [state, setState] = useState("");
-  const [hora, setHora] = useState("");
-  const [minuto, setMinuto] = useState("");
-  const [segundo, setSegundo] = useState("");
+
+  // const [hora, setHora] = useState("");
+  // const [minuto, setMinuto] = useState("");
+  // const [segundo, setSegundo] = useState("");
   const classes = useStyles();
 
-  useEffect(() => {
-    async function loadItens() {
-      function novaHora() {
-        function pad(s) {
-          return s < 10 ? "0" + s : s;
-        }
-        var date = new Date();
-        return [
-          setHora(date.getHours()),
-          setMinuto(date.getMinutes()),
-          setSegundo(date.getSeconds()),
-        ].map(pad);
-      }
-      novaHora();
-    }
+  // useEffect(() => {
+  //   async function loadItens() {
+  //     function novaHora() {
+  //       function pad(s) {
+  //         return s < 10 ? "0" + s : s;
+  //       }
+  //       var date = new Date();
+  //       return [
+  //         setHora(date.getHours()),
+  //         setMinuto(date.getMinutes()),
+  //         setSegundo(date.getSeconds()),
+  //       ].map(pad);
+  //     }
+  //     novaHora();
+  //   }
 
-    setInterval(() => {
-      loadItens();
-    }, 990);
-  }, []);
+  //   setInterval(() => {
+  //     loadItens();
+  //   }, 990);
+  // }, []);
 
   // const [actual, setActual] = useState("");
 
@@ -86,7 +91,7 @@ const Time = () => {
         <Card className={classes.card}>
           <CardContent>
             <Typography className={classes.title} color="#fff" gutterBottom>
-              {hora}
+              <Clock format="HH" interval={1000} ticking={true} />
             </Typography>
           </CardContent>
         </Card>
@@ -94,7 +99,8 @@ const Time = () => {
         <Card className={classes.card}>
           <CardContent>
             <Typography className={classes.title} color="#fff" gutterBottom>
-              {minuto}
+              {/* {minuto} */}
+              <Clock format="mm" interval={1000} ticking={true} />
             </Typography>
           </CardContent>
         </Card>
@@ -102,7 +108,8 @@ const Time = () => {
         <Card className={classes.card}>
           <CardContent>
             <Typography className={classes.title} color="#fff" gutterBottom>
-              {segundo}
+              {/* {segundo} */}
+              <Clock format="ss" interval={1000} ticking={true} />
             </Typography>
           </CardContent>
         </Card>
