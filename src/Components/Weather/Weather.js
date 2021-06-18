@@ -112,17 +112,12 @@ const Weather = () => {
       window.setTimeout(function () {
         window.location.reload();
         // setLoading(false);
-      }, 60000);
+      }, 600000);
       // setLoading(false);
-    }, 60000);
+    }, 600000);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
-
-  // const handleLoading = (e) => {
-  //   e.preventDefault();
-  //   !loading ? setLoading(false) : setLoading(true);
-  // };
 
   return (
     <div className={classes.root}>
