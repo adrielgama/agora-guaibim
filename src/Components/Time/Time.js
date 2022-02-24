@@ -60,8 +60,10 @@ const Time = () => {
     async function syncLoad() {
       await loadTimezone();
     }
-    syncLoad()
-  }, [data]);
+    setInterval(() => {
+      syncLoad()
+    }, 1000);
+  }, []);
 
   return (
     <div className={classes.root}>
