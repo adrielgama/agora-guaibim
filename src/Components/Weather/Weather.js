@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 
@@ -78,7 +79,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Weather = () => {
   const classes = useStyles();
-  // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState([]);
   const [temperature, setTemperature] = useState();
   const [realFeel, setRealFeel] = useState();
@@ -87,13 +87,11 @@ const Weather = () => {
 
   const [loading, setLoading] = useState(true);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   async function loadWeather() {
     await api
       .get(`?apikey=${API_KEY}&language=pt-br&details=true`)
       .then((response) => {
         setData(response.data[0]);
-        // console.log(response.data[0]);
         setTemperature(data.Temperature.Metric.Value);
         setRealFeel(data.RealFeelTemperature.Metric.Value);
         setWeather(data.WeatherIcon);
@@ -108,15 +106,11 @@ const Weather = () => {
   useEffect(() => {
     loadWeather();
     setInterval(() => {
-      // loadWeather();
       window.setTimeout(function () {
         window.location.reload();
-        // setLoading(false);
       }, 600000);
-      // setLoading(false);
     }, 600000);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
   return (
@@ -208,7 +202,6 @@ const Weather = () => {
       <div className={classes.realfeel}>
         <h3>Sensação térmica</h3>
         <h2>{realFeel}º C</h2>
-        {/* {handleLoading} */}
       </div>
     </div>
   );

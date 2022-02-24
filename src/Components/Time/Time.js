@@ -1,18 +1,11 @@
-import React, {
-  useState,
-  // useEffect
-} from "react";
-// import moment from "moment";
-// import moment from "moment-timezone/builds/moment-timezone-with-data";
-import Clock from "react-live-clock";
-
+import React, { useState, useEffect } from "react";
+import moment from "moment";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 
-// import api from "../../services/apiTime";
-// const API_KEY = process.env.REACT_APP_TIMEZONE_API_KEY;
+import api from "../../services/apiTime";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,43 +40,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// START FUNCTION
+
 const Time = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [data, setData] = useState([]);
-
-  // const [city, setCity] = useState("");
-  // const [state, setState] = useState("");
-
-  // const [hora, setHora] = useState("");
-  // const [minuto, setMinuto] = useState("");
-  // const [segundo, setSegundo] = useState("");
+  const [data, setData] = useState("");
   const classes = useStyles();
 
-  // useEffect(() => {
-  //   async function loadItens() {
-  //     function novaHora() {
-  //       function pad(s) {
-  //         return s < 10 ? "0" + s : s;
-  //       }
-  //       var date = new Date();
-  //       return [
-  //         setHora(date.getHours()),
-  //         setMinuto(date.getMinutes()),
-  //         setSegundo(date.getSeconds()),
-  //       ].map(pad);
-  //     }
-  //     novaHora();
-  //   }
+  async function loadTimezone() {
+    await api
+      .get(`Bahia`)
+      .then((response) => {
+        setData(response.data.datetime);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
-  //   setInterval(() => {
-  //     loadItens();
-  //   }, 990);
-  // }, []);
-
-  // const [actual, setActual] = useState("");
-
-  // console.log(novaHora());
+  useEffect(() => {
+    async function syncLoad() {
+      await loadTimezone();
+    }
+    syncLoad()
+  }, [data]);
 
   return (
     <div className={classes.root}>
@@ -91,7 +69,7 @@ const Time = () => {
         <Card className={classes.card}>
           <CardContent>
             <Typography className={classes.title} color="#fff" gutterBottom>
-              <Clock format="HH" interval={1000} ticking={true} />
+              <div>{moment(data).format("HH")}</div>
             </Typography>
           </CardContent>
         </Card>
@@ -99,8 +77,7 @@ const Time = () => {
         <Card className={classes.card}>
           <CardContent>
             <Typography className={classes.title} color="#fff" gutterBottom>
-              {/* {minuto} */}
-              <Clock format="mm" interval={1000} ticking={true} />
+              <div>{moment(data).format("mm")}</div>
             </Typography>
           </CardContent>
         </Card>
@@ -108,8 +85,7 @@ const Time = () => {
         <Card className={classes.card}>
           <CardContent>
             <Typography className={classes.title} color="#fff" gutterBottom>
-              {/* {segundo} */}
-              <Clock format="ss" interval={1000} ticking={true} />
+              <div>{moment(data).format("ss")}</div>
             </Typography>
           </CardContent>
         </Card>
@@ -121,27 +97,3 @@ const Time = () => {
 };
 
 export default Time;
-
-// useEffect(() => {
-//   async function loadItens() {
-//     api
-//       .get(`ip/?token=${API_KEY}`)
-//       .then((response) => {
-//         setData(response.data.data);
-//         // console.log(response.data.data);
-//         // setCity(response.data.data.city);
-//         // setState(response.data.data.state_code);
-
-//         setHora(response.data.data.datetime.hour_24_wilz);
-//         setMinuto(response.data.data.datetime.minutes);
-//         setSegundo(response.data.data.datetime.seconds);
-//       })
-//       .catch((err) => {
-//         // console.log(err);
-//       });
-//   }
-
-//   setInterval(() => {
-//     loadItens();
-//   }, 990);
-// }, []);
